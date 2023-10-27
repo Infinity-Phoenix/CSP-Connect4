@@ -4,8 +4,9 @@ import sys
 import math
 
 
+# colors in rgb value
 BLUE = (0, 0, 255)
-GREEN = (0,255,0)
+GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
@@ -13,6 +14,7 @@ PINK = (255, 0, 255)
 PURPLE = (55, 0, 55)
 ORANGE = (255, 128, 0)
 
+# constants for menu
 players = 6
 ROW_COUNT = 12
 COLUMN_COUNT = 15
@@ -40,7 +42,8 @@ def get_next_open_row(board, col):
 def print_board(board):
     print(np.flip(board, 0))
 
-
+# Code created by Arya Kunisetty
+# Checks if player has won the game
 def winning_move(board, piece):
     # Check horizontal locations for win
     for c in range(COLUMN_COUNT - 3):
@@ -70,7 +73,7 @@ def winning_move(board, piece):
                 c + 3] == piece:
                 return True
 
-
+# Draws the Board
 def draw_board(board):
     for c in range(COLUMN_COUNT):
         for r in range(ROW_COUNT):
@@ -99,7 +102,7 @@ def draw_board(board):
                 pygame.draw.circle(screen, PURPLE, (
                     int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
     pygame.display.update()
-
+    # Code created by ak47
 
 board = create_board()
 print_board(board)
@@ -144,6 +147,7 @@ while not game_over:
             elif turn==5:
                 pygame.draw.circle(screen, PURPLE, (posx, int(SQUARESIZE / 2)), RADIUS)
 
+        # Actual game play with inputs
         pygame.display.update()
         if event.type == pygame.MOUSEBUTTONDOWN:
             pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARESIZE))
@@ -177,8 +181,8 @@ while not game_over:
                         screen.blit(label, (50, -15))
                         game_over = True
 
-
-
+            # Code created by ak47
+            
             # # Ask for Player 3 Input
             if(turn==2):
                 posx = event.pos[0]
@@ -253,3 +257,5 @@ while not game_over:
 
         if game_over:
              pygame.time.delay(10000)
+
+# Code created by ak47
