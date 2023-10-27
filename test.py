@@ -10,7 +10,7 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 PINK = (255, 0, 255)
-
+players = 3
 ROW_COUNT = 10
 COLUMN_COUNT = 15
 
@@ -198,7 +198,7 @@ while not game_over:
             draw_board(board)
 
             turn += 1
-            turn = turn % 4
+            turn = turn % players
 
 
         if game_over:
