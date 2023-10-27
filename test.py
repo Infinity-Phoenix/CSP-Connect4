@@ -10,8 +10,11 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 PINK = (255, 0, 255)
-players = 3
-ROW_COUNT = 10
+PURPLE = (55, 0, 55)
+ORANGE = (255, 128, 0)
+
+players = 6
+ROW_COUNT = 12
 COLUMN_COUNT = 15
 
 
@@ -89,6 +92,12 @@ def draw_board(board):
             elif board[r][c] == 4:
                 pygame.draw.circle(screen, PINK, (
                     int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+            elif board[r][c] == 5:
+                pygame.draw.circle(screen, ORANGE, (
+                    int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+            elif board[r][c] == 6:
+                pygame.draw.circle(screen, PURPLE, (
+                    int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
     pygame.display.update()
 
 
@@ -128,8 +137,13 @@ while not game_over:
                 pygame.draw.circle(screen, YELLOW, (posx, int(SQUARESIZE / 2)), RADIUS)
             elif turn==2:
                 pygame.draw.circle(screen,GREEN, (posx, int(SQUARESIZE / 2)), RADIUS)
-            else:
+            elif turn==3:
                 pygame.draw.circle(screen, PINK, (posx, int(SQUARESIZE / 2)), RADIUS)
+            elif turn==4:
+                pygame.draw.circle(screen, ORANGE, (posx, int(SQUARESIZE / 2)), RADIUS)
+            elif turn==5:
+                pygame.draw.circle(screen, PURPLE, (posx, int(SQUARESIZE / 2)), RADIUS)
+
         pygame.display.update()
         if event.type == pygame.MOUSEBUTTONDOWN:
             pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARESIZE))
@@ -194,6 +208,42 @@ while not game_over:
                         label = myfont.render("Player 4 wins!!", 1, PINK)
                         screen.blit(label, (50, -15))
                         game_over = True
+
+            if (turn == 4):
+                posx = event.pos[0]
+                col = int(math.floor(posx / SQUARESIZE))
+
+                if is_valid_location(board, col):
+
+                    row = get_next_open_row(board, col)
+
+                    drop_piece(board, row, col, 5)
+
+                    if winning_move(board, 5):
+                        label = myfont.render("Player 5 wins!!", 1, ORANGE)
+
+                        screen.blit(label, (50, -15))
+
+                        game_over = True
+
+            if (turn == 5):
+                posx = event.pos[0]
+                col = int(math.floor(posx / SQUARESIZE))
+
+                if is_valid_location(board, col):
+
+                    row = get_next_open_row(board, col)
+
+                    drop_piece(board, row, col, 6)
+
+                    if winning_move(board, 6):
+                        label = myfont.render("Player 6 wins!!", 1, PURPLE)
+
+                        screen.blit(label, (50, -15))
+
+                        game_over = True
+
+
             print_board(board)
             draw_board(board)
 
