@@ -182,7 +182,7 @@ while not game_over:
                         game_over = True
 
             # Code created by ak47
-            
+
             # # Ask for Player 3 Input
             if(turn==2):
                 posx = event.pos[0]
